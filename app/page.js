@@ -21,7 +21,7 @@ export default async function Home() {
     <div className="grid grid-cols-4 gap-6 space-y-2 p-10">
         {
           products.map((product, index) => (
-            <Product key={index} image={product.thumbnail} name={product.title} price={product.price} />
+            <Product key={index} id={product.id} image={product.thumbnail} name={product.title} price={product.price} />
           ))
         }
     </div>
