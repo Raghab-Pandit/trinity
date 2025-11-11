@@ -19,7 +19,7 @@ const Product = ({id, image, name, price}) => {
                 <div className="mt-2 mb-3 flex flex-col items-center justify-between h-full px-2">
                     <h1 className='text-white font-semibold text-lg mt-2'>{name ? `${name}` : "Product Name"}</h1>
                     <p className='text-[#94A3B8] text-sm'>{price ? `$${price}` : "$99.99"}</p>
-                    <Link href={`/${id}`} className=' bg-[#702cdf] text-white px-4 py-1 rounded-full hover:bg-[#5a23b8] transition-colors duration-200 cursor-pointer'>Check it out</Link>
+                    <Link href={`/products/${id}`} className=' bg-[#702cdf] text-white px-4 py-1 rounded-full hover:bg-[#5a23b8] transition-colors duration-200 cursor-pointer'>Check it out</Link>
                 </div>            
             </div>
         </div>
