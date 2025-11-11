@@ -3,7 +3,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gray-800 overflow-hidden border-t border-[#712cdf70]">
+    <footer className="relative bottom-0 bg-gray-800 overflow-hidden border-t border-[#712cdf70]">
       {/* Blurred Decorative Blobs */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#6d28d9]/30 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#d14cff]/30 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2"></div>
@@ -29,7 +29,7 @@ const Footer = () => {
             placeholder="Enter Your Email"
             className="ml-2 w-full bg-transparent text-white placeholder-gray-400 text-sm outline-none"
           />
-          <button className="ml-3 bg-[#6d28d9] hover:bg-[#702cdf] text-white px-4 py-1 rounded-md transition">
+          <button className="ml-3 bg-[#6d28d9] hover:bg-[#702cdf] text-white px-4 py-1 rounded-md transition cursor-pointer">
             Subscribe
           </button>
         </div>

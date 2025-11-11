@@ -2,7 +2,7 @@
 
 :root {
   --background: #111827;
-  --foreground:  #702cdf;
+  --foreground:  #712cdf;
 }
 
 
@@ -12,3 +12,6 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.bg-product{
+  background-color: #CAD8DE;
+}
