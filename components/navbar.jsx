@@ -5,18 +5,21 @@ import { TbSwords } from "react-icons/tb";
 import { IoSearchOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
 import Link from 'next/link';
-import SearchContext from '@/ContextAPI/SearchContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { Searchparams } from '@/Redux/Slices/searchSlice';
 
 const Navbar = () => {
-  //States
-    const [search, setSearch]= useState('');
+
 
   //Functions
+
+      // Redux Slice for Search
+
+        const dispatch= useDispatch();
 
 
 
   return (
-    <SearchContext.Provider value={search}>
 <div className="bg-gray-900 h-16 border-b border-[#712cdf70] flex items-center justify-between px-6 shadow-md">
   {/* Logo Section */}
   <Link className="flex items-center space-x-3 cursor-pointer" href={'/'}>
@@ -32,8 +35,7 @@ const Navbar = () => {
       <input
         type="text"
         placeholder="Search for products..."
-        onChange={( e )=> setSearch(e.target.value)}
-        value={search}
+        onChange={( e )=> dispatch(Searchparams(e.target.value))}
         className="ml-2 w-full bg-transparent text-white placeholder-gray-400 text-sm outline-none"
       />
     </div>
@@ -44,7 +46,6 @@ const Navbar = () => {
     </Link>
   </div>
 </div>
-  </SearchContext.Provider>
   )
 }
 
