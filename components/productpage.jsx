@@ -3,11 +3,14 @@ import axiosInstance from '@/axiosInstance/axiosInstance';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import { CiImageOn } from 'react-icons/ci';
+import { FaCartArrowDown, FaComment } from "react-icons/fa6";
+import Reviews from './reviews';
 
 const ProductPage = ({id}) => {
 
   console.log(id);
 
+  const [reviewsTab, setReviewsTab]= useState(false);
   const [Product, setProduct]= useState();
   const [ImageNum, setImageNum]= useState(0);
 
@@ -28,7 +31,8 @@ useEffect(() => {
 }, []);
 
   return (
-    <>
+      <>
+    {reviewsTab && <Reviews visibility={reviewsTab} cut={setReviewsTab} Product={Product}/>}
         <div className='flex w-full h-full justify-center space-x-5 mt-6'>
             <div className='w-[40%] flex flex-col justify-between'>
                 <div className="mt-2 flex items-center justify-center transition-300 transition-all">
@@ -80,7 +84,17 @@ useEffect(() => {
                         <p className='text-white'>
                             {Product?.description}
                         </p>
-
+                    </div>
+                    <div className="flex space-x-4 items-center justify-between mt-10">
+                            <button className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-500 transition-all cursor-pointer flex items-center">
+                                Add to Cart <FaCartArrowDown className='ml-2' />
+                            </button>
+                            {/* <button className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 cursor-pointer hover:text-white transition-500 transition-all">
+                                Buy Now
+                            </button> */}
+                            <button onClick={()=> setReviewsTab(!reviewsTab)} className="border-2 border-transparent hover:border-white px-6 py-3 rounded-lg font-semibold bg-blue-600 hover:bg-transparent text-white transition-500 transition-all cursor-pointer flex items-center">
+                                See Reviews <FaComment className='ml-2' />
+                            </button>
                     </div>
                     <div>
                         
