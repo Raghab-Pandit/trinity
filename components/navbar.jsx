@@ -5,7 +5,7 @@ import { TbSwords } from "react-icons/tb";
 import { IoSearchOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Searchparams } from '@/Redux/Slices/searchSlice';
 
 const Navbar = () => {
