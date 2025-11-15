@@ -5,14 +5,29 @@ import React, { useEffect, useState } from 'react'
 import { CiImageOn } from 'react-icons/ci';
 import { FaCartArrowDown, FaComment } from "react-icons/fa6";
 import Reviews from './reviews';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart } from '@/Redux/Slices/cartSlice';
 
 const ProductPage = ({id}) => {
 
-  console.log(id);
 
   const [reviewsTab, setReviewsTab]= useState(false);
   const [Product, setProduct]= useState();
   const [ImageNum, setImageNum]= useState(0);
+  const [itemInCart, setItemInCart]= useState(false);
+
+
+    const cart= useSelector((state)=> state.cart.value);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setItemInCart(cart.includes(id))
+    }, [cart, id]);
+
+
+    useEffect(() => {
+      console.log("Cart updated:", cart);
+    }, [cart]);
 
   const fetchProducts = async () => {
   try{
@@ -86,8 +101,8 @@ useEffect(() => {
                         </p>
                     </div>
                     <div className="flex space-x-4 items-center justify-between mt-10">
-                            <button className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-500 transition-all cursor-pointer flex items-center">
-                                Add to Cart <FaCartArrowDown className='ml-2' />
+                        <button onClick={() => itemInCart ? dispatch(removeFromCart(id)) : dispatch(addToCart(id))} className={`border-2 ${itemInCart ? 'border-red-600 hover:bg-red-600' : 'border-blue-600 hover:bg-blue-600'}  text-white px-6 py-3 rounded-lg font-semibold hover:text-white transition-500 transition-all cursor-pointer flex items-center`}>
+                                {itemInCart ? 'Remove From Cart' :`Add to Cart `} {itemInCart ? <FaCartArrowDown className='ml-2' /> : <FaCartArrowDown className='ml-2' />}
                             </button>
                             {/* <button className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 cursor-pointer hover:text-white transition-500 transition-all">
                                 Buy Now
