@@ -1,15 +1,45 @@
 "use client"
-import React from 'react'
+import axiosInstance from '@/axiosInstance/axiosInstance';
+import React, { useEffect, useState } from 'react'
 import { CiUser } from 'react-icons/ci'
+import { useSelector } from 'react-redux';
 
 const Page = () => {
+
+  const [Product, setProduct]= useState([]);
+
+  const cart= useSelector((state)=> state.cart.value);
     const user={
-        name: "Saul Goodman",
-        order_history: [
-            {id: 1, order_id: "#01537", item: "Eggs", status: "Delivered" , date: "2023-10-01", amount: "$29.99"},
-            {id: 2, order_id: "#02856", item: "Bacon", status: "Pending", date: "2023-09-15", amount: "$49.99"},
-            {id: 3, order_id: "#18686", item: "Orange Juice", status: "Cancelled", date: "2023-08-30", amount: "$19.99"}
-        ]}
+        name: "Saul Goodman"
+      };
+
+const fetchProducts = async () => {
+  try{
+
+    if(cart.length !== 0){
+      const prodReqs = await Promise.all(        
+      cart.map((id) =>axiosInstance.get(`/products/${id}`))
+            )
+            
+            const prodData= await prodReqs.map((res)=> res.data)
+
+            const cartProds= await prodData.filter((value, index, array)=> array.find((a)=> a.id === value.id))
+
+            setProduct(cartProds);
+    }
+    else{
+      setProduct([]);
+    }
+
+
+  }catch(error){
+    console.error("Error fetching products:", error);
+  }
+}
+
+useEffect(() => {
+  fetchProducts();
+}, [], [...cart]);
   return (
     <div className='h-100 flex justify-between'>
       <div className=' p-3 flex flex-col justify-between'>
@@ -48,13 +78,13 @@ const Page = () => {
       </tr>
     </thead>
     <tbody>
-      {user.order_history.map((order) => (
+      {Product.map((order, index) => (
         <tr key={order.id}>
-                <td className="text-center px-3 py-2 font-semibold">{order.order_id}</td>
-                <td className="text-center px-3 py-2 text-white/60">{order.date}</td>
-                <td className="text-center px-3 py-2">{order.item}</td>
-                <td className="text-center px-3 py-2">{order.amount}</td>
-                <td className="text-center px-3 py-2">{order.status}</td>
+                <td className="text-center px-3 py-2 font-semibold">#{Math.floor(Math.random()*10000)}</td>
+                <td className="text-center px-3 py-2 text-white/60">2025-01-01</td>
+                <td className="text-center px-3 py-2">{order.title}</td>
+                <td className="text-center px-3 py-2">${order.price}</td>
+                <td className="text-center px-3 py-2">Pending</td>
         </tr>
       ))}
     </tbody>
