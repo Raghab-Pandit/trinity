@@ -6,40 +6,46 @@ import { useSelector } from 'react-redux';
 
 const Page = () => {
 
-  const [Product, setProduct]= useState([]);
-
   const cart= useSelector((state)=> state.cart.value);
     const user={
         name: "Saul Goodman"
       };
 
-const fetchProducts = async () => {
-  try{
+// const fetchProducts = async () => {
+//   try{
 
-    if(cart.length !== 0){
-      const prodReqs = await Promise.all(        
-      cart.map((id) =>axiosInstance.get(`/products/${id}`))
-            )
+//     if(cart.length !== 0){
+//       const prodReqs = await Promise.all(        
+//       cart.map((prod) =>axiosInstance.get(`/products/${prod.id}`))
+//             )
             
-            const prodData= await prodReqs.map((res)=> res.data)
+//             const prodData= await prodReqs.map((res)=> res.data)
 
-            const cartProds= await prodData.filter((value, index, array)=> array.find((a)=> a.id === value.id))
+//             const cartProds= await prodData.filter((value, index, array)=> array.find((a)=> a.id === value.id))
 
-            setProduct(cartProds);
-    }
-    else{
-      setProduct([]);
-    }
+//             console.log('Cart qprod;s',cartProds)
+//             const newC= await Promise.all(
+//               cart.map((prod)=>{
+//                 console.log('id of prod',prod.id)
+//               cartProds.map((p)=> console.log('p id',p.id))
+//               console.log(cartProds.includes(prod.id))
+//               //console.log(filtered)
+//               }))
+//             //setProduct(newC);
+//     }
+//     else{
+//       setProduct([]);
+//     }
 
 
-  }catch(error){
-    console.error("Error fetching products:", error);
-  }
-}
+//   }catch(error){
+//     console.error("Error fetching products:", error);
+//   }
+// }
 
-useEffect(() => {
-  fetchProducts();
-}, [], [...cart]);
+// useEffect(() => {
+//   fetchProducts();
+// }, [], [...cart]);
   return (
     <div className='h-100 flex justify-between'>
       <div className=' p-3 flex flex-col justify-between'>
@@ -67,7 +73,7 @@ useEffect(() => {
       <div className='w-[75%] h-full pb-8 pt-3 pr-4'>
         {/* User Orders */}
         <div className='p-5 px-7 h-full bg-[#1E2330] rounded-[40px]'>
-          <h2 className='text-xl font-bold text-white'>Order History</h2>
+          <h2 className='text-xl font-bold text-white'>Cart</h2>
             <div className="mt-5 w-full h-[80%] overflow-y-auto">
   <table className="w-full table-fixed text-sm text-white">
     <thead className="bg-gray-700/60">
@@ -78,12 +84,17 @@ useEffect(() => {
       </tr>
     </thead>
     <tbody>
-      {Product.map((order, index) => (
-        <tr key={order.id}>
+      { cart.length === 0 ?
+        <tr>
+          <td colSpan="5" className="text-center px-3 py-2 font-semibold">No orders placed yet.</td>
+        </tr>
+      :
+      cart.map((prod, index) => (
+        <tr key={prod.id}>
                 <td className="text-center px-3 py-2 font-semibold">#{Math.floor(Math.random()*10000)}</td>
-                <td className="text-center px-3 py-2 text-white/60">2025-01-01</td>
-                <td className="text-center px-3 py-2">{order.title}</td>
-                <td className="text-center px-3 py-2">${order.price}</td>
+                <td className="text-center px-3 py-2 text-white/60">{prod.date}</td>
+                <td className="text-center px-3 py-2">{prod.product.title}</td>
+                <td className="text-center px-3 py-2">${prod.product.price}</td>
                 <td className="text-center px-3 py-2">Pending</td>
         </tr>
       ))}

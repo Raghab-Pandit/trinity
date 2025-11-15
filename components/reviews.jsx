@@ -36,8 +36,8 @@ const Reviews = ({visibility, cut, Product}) => {
     }
   return (
     <>
-        <div className={`bg-[#111827]/20 backdrop-blur-[2px] w-full h-full flex flex-col items-center absolute ${visibility ? "visible" : "invisible"} transition-300 transition-all`}>
-            <div className="h-110 w-110 bg-[#111827] border border-white mt-10 rounded-[15px]">
+        <div className={`bg-[#111827]/20 w-full h-full flex flex-col items-end absolute ${visibility ? "visible" : "invisible"} transition-300 transition-all`}>
+            <div className="h-110 w-110 bg-[#222f4d] mt-10 rounded-[15px] shadow-lg">
                 <div className='flex items-center justify-between h-[10%] bg-white/80 px-2 rounded-t-[14px]'>
                     <h1 className='text-background font-bold'>Reviews</h1>
                     <div className='cursor-pointer bg-red-400 h-5 w-5 rounded-[50%]' onClick={()=> cut(false)}></div>
@@ -46,9 +46,10 @@ const Reviews = ({visibility, cut, Product}) => {
             {Product?.reviews.length === 0 ? 
             <p className='text-white'>No reviews yet.</p> :
             Product?.reviews.map((review, index)=>(
-                <div key={index} className='mb-2 w-full bg-[#7CB4B8]/75 p-4 rounded-lg hover:bg-[#7CB4B8] transition-300 transition-all cursor-default'>
+                <div key={index} className='mb-2 w-full bg-white/75 p-4 rounded-lg hover:bg-white transition-300 transition-all cursor-default'>
                     <div className='flex items-center space-x-1'>
-                        <p className='text-[#040F16] font-semibold text-[14px]'>{review.reviewerName}</p>
+                        <p className='text-[#040F16] font-semibold text-[16px]'>{review.reviewerName}</p>
+                        &nbsp;
                         <p className='text-[#040F16]/55 font-light text-[13px] cursor-default'>{reviewDate(review.date)}</p>
                     </div>
                     <p className='text-[#040F16]/55 font-light text-[13px] cursor-default hover:text-[#040F16] transition-300 transition-all'>{review.reviewerEmail.split('@')[0] + '@trinity.com'}:</p>
