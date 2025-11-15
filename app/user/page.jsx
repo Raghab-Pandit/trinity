@@ -1,45 +1,56 @@
 "use client"
 import axiosInstance from '@/axiosInstance/axiosInstance';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { CiUser } from 'react-icons/ci'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { MdDeleteOutline } from "react-icons/md";
+import { removeFromCart } from '@/Redux/Slices/cartSlice';
 
 const Page = () => {
 
-  const [Product, setProduct]= useState([]);
-
   const cart= useSelector((state)=> state.cart.value);
+  const dispatch = useDispatch();
+
     const user={
         name: "Saul Goodman"
       };
 
-const fetchProducts = async () => {
-  try{
+// const fetchProducts = async () => {
+//   try{
 
-    if(cart.length !== 0){
-      const prodReqs = await Promise.all(        
-      cart.map((id) =>axiosInstance.get(`/products/${id}`))
-            )
+//     if(cart.length !== 0){
+//       const prodReqs = await Promise.all(        
+//       cart.map((prod) =>axiosInstance.get(`/products/${prod.id}`))
+//             )
             
-            const prodData= await prodReqs.map((res)=> res.data)
+//             const prodData= await prodReqs.map((res)=> res.data)
 
-            const cartProds= await prodData.filter((value, index, array)=> array.find((a)=> a.id === value.id))
+//             const cartProds= await prodData.filter((value, index, array)=> array.find((a)=> a.id === value.id))
 
-            setProduct(cartProds);
-    }
-    else{
-      setProduct([]);
-    }
+//             console.log('Cart qprod;s',cartProds)
+//             const newC= await Promise.all(
+//               cart.map((prod)=>{
+//                 console.log('id of prod',prod.id)
+//               cartProds.map((p)=> console.log('p id',p.id))
+//               console.log(cartProds.includes(prod.id))
+//               //console.log(filtered)
+//               }))
+//             //setProduct(newC);
+//     }
+//     else{
+//       setProduct([]);
+//     }
 
 
-  }catch(error){
-    console.error("Error fetching products:", error);
-  }
-}
+//   }catch(error){
+//     console.error("Error fetching products:", error);
+//   }
+// }
 
-useEffect(() => {
-  fetchProducts();
-}, [], [...cart]);
+// useEffect(() => {
+//   fetchProducts();
+// }, [], [...cart]);
   return (
     <div className='h-100 flex justify-between'>
       <div className=' p-3 flex flex-col justify-between'>
@@ -67,24 +78,41 @@ useEffect(() => {
       <div className='w-[75%] h-full pb-8 pt-3 pr-4'>
         {/* User Orders */}
         <div className='p-5 px-7 h-full bg-[#1E2330] rounded-[40px]'>
-          <h2 className='text-xl font-bold text-white'>Order History</h2>
+          <h2 className='text-xl font-bold text-white'>Cart</h2>
             <div className="mt-5 w-full h-[80%] overflow-y-auto">
   <table className="w-full table-fixed text-sm text-white">
-    <thead className="bg-gray-700/60">
+    <thead className="bg-gray-700/90 sticky top-0">
       <tr>
-        {["Order ID", "Date", "Item", "Amount", "Status"].map((header) => (
-          <th key={header} className="text-center px-3 py-2">{header}</th>
+        {["Order ID", "Date", "Item", "Quantity", "Amount", "Status", "Delete"].map((header) => (
+          <th key={header} className="text-center px-3 py-2 sticky top-0">{header}</th>
         ))}
       </tr>
     </thead>
     <tbody>
-      {Product.map((order, index) => (
-        <tr key={order.id}>
+      { cart.length === 0 ?
+        <tr>
+          <td colSpan="7" className="text-center px-3 py-2 font-semibold">No orders placed yet.</td>
+        </tr>
+      :
+      cart.map((prod, index) => (
+        <tr key={prod.id}>
                 <td className="text-center px-3 py-2 font-semibold">#{Math.floor(Math.random()*10000)}</td>
-                <td className="text-center px-3 py-2 text-white/60">2025-01-01</td>
-                <td className="text-center px-3 py-2">{order.title}</td>
-                <td className="text-center px-3 py-2">${order.price}</td>
+                <td className="text-center px-3 py-2 text-white/60">{prod.date}</td>
+                <td className="text-center px-3 py-2 cursor-pointer">
+                <Link href={`/products/${prod.product.id}`} className="text-white/80 hover:text-white">{prod.product.title}</Link>
+                </td>
+                <td className="text-center px-3 py-2">
+                  <Link href={`/products/${prod.product.id}`} className="text-white/80 hover:text-white">{prod.quantity}</Link>
+                </td>
+                <td className="text-center px-3 py-2">${prod.product.price}</td>
                 <td className="text-center px-3 py-2">Pending</td>
+                <td className="text-center py-5 flex items-center justify-center">
+                  <div 
+                  onClick={()=> dispatch(removeFromCart(prod.id))}
+                  className="flex items-center justify-center w-8 h-8 text-[20px] cursor-pointer hover:bg-red-600/40 transition-all transition-300 bg-red-500/40 text-red-500 font-semibold rounded-[50%]">
+                    <MdDeleteOutline />
+                  </div>
+                </td>
         </tr>
       ))}
     </tbody>
