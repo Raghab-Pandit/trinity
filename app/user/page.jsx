@@ -1,12 +1,17 @@
 "use client"
 import axiosInstance from '@/axiosInstance/axiosInstance';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { CiUser } from 'react-icons/ci'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { MdDeleteOutline } from "react-icons/md";
+import { removeFromCart } from '@/Redux/Slices/cartSlice';
 
 const Page = () => {
 
   const cart= useSelector((state)=> state.cart.value);
+  const dispatch = useDispatch();
+
     const user={
         name: "Saul Goodman"
       };
@@ -76,26 +81,38 @@ const Page = () => {
           <h2 className='text-xl font-bold text-white'>Cart</h2>
             <div className="mt-5 w-full h-[80%] overflow-y-auto">
   <table className="w-full table-fixed text-sm text-white">
-    <thead className="bg-gray-700/60">
+    <thead className="bg-gray-700/90 sticky top-0">
       <tr>
-        {["Order ID", "Date", "Item", "Amount", "Status"].map((header) => (
-          <th key={header} className="text-center px-3 py-2">{header}</th>
+        {["Order ID", "Date", "Item", "Quantity", "Amount", "Status", "Delete"].map((header) => (
+          <th key={header} className="text-center px-3 py-2 sticky top-0">{header}</th>
         ))}
       </tr>
     </thead>
     <tbody>
       { cart.length === 0 ?
         <tr>
-          <td colSpan="5" className="text-center px-3 py-2 font-semibold">No orders placed yet.</td>
+          <td colSpan="7" className="text-center px-3 py-2 font-semibold">No orders placed yet.</td>
         </tr>
       :
       cart.map((prod, index) => (
         <tr key={prod.id}>
                 <td className="text-center px-3 py-2 font-semibold">#{Math.floor(Math.random()*10000)}</td>
                 <td className="text-center px-3 py-2 text-white/60">{prod.date}</td>
-                <td className="text-center px-3 py-2">{prod.product.title}</td>
+                <td className="text-center px-3 py-2 cursor-pointer">
+                <Link href={`/products/${prod.product.id}`} className="text-white/80 hover:text-white">{prod.product.title}</Link>
+                </td>
+                <td className="text-center px-3 py-2">
+                  <Link href={`/products/${prod.product.id}`} className="text-white/80 hover:text-white">{prod.quantity}</Link>
+                </td>
                 <td className="text-center px-3 py-2">${prod.product.price}</td>
                 <td className="text-center px-3 py-2">Pending</td>
+                <td className="text-center py-5 flex items-center justify-center">
+                  <div 
+                  onClick={()=> dispatch(removeFromCart(prod.id))}
+                  className="flex items-center justify-center w-8 h-8 text-[20px] cursor-pointer hover:bg-red-600/40 transition-all transition-300 bg-red-500/40 text-red-500 font-semibold rounded-[50%]">
+                    <MdDeleteOutline />
+                  </div>
+                </td>
         </tr>
       ))}
     </tbody>

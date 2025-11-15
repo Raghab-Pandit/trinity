@@ -6,7 +6,7 @@ import { CiImageOn } from 'react-icons/ci';
 import { FaCartArrowDown, FaComment } from "react-icons/fa6";
 import Reviews from './reviews';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '@/Redux/Slices/cartSlice';
+import { addToCart, changeQuantity, removeFromCart } from '@/Redux/Slices/cartSlice';
 
 const ProductPage = ({id}) => {
 
@@ -15,6 +15,8 @@ const ProductPage = ({id}) => {
   const [Product, setProduct]= useState();
   const [ImageNum, setImageNum]= useState(0);
   const [itemInCart, setItemInCart]= useState(false);
+  const [prodQuantity, setProdQuantity]= useState(1);
+  const [changeInQuantity, setChangeInQuantity]= useState(false);
 
   const date= (new Date()).toISOString().split('T')[0];
 
@@ -24,6 +26,13 @@ const ProductPage = ({id}) => {
     useEffect(() => {
         setItemInCart(cart.map((c)=> c.id).includes(id))
     }, [cart, id]);
+
+    useEffect(() => {
+        if(itemInCart){
+            const cartItem= cart.find((c)=> c.id === id);
+            setProdQuantity(cartItem.quantity);
+        } 
+    }, [itemInCart, cart, id]);
 
 
     useEffect(() => {
@@ -45,6 +54,23 @@ const ProductPage = ({id}) => {
 useEffect(() => {
   fetchProducts();
 }, []);
+
+
+        const changeQuantityFunc= () => {
+            if(cart.map((c)=> c.id).includes(id)){
+                dispatch(changeQuantity({id: id, quantity: prodQuantity}));
+            }
+            else{
+                return;
+            }
+        }
+
+
+        const addItemToCart= () => {
+                dispatch(addToCart({id: id , date: date, product: Product, quantity: prodQuantity}));
+                setChangeInQuantity(false);
+        }
+
 
   return (
       <>
@@ -102,16 +128,31 @@ useEffect(() => {
                         </p>
                     </div>
                     <div className="flex space-x-4 items-center justify-between mt-10">
-                        <button onClick={() => itemInCart ? dispatch(removeFromCart(id)) : dispatch(addToCart({id: id , date: date, product: Product}))} className={`border-2 ${itemInCart ? 'border-red-600 hover:bg-red-600' : 'border-blue-600 hover:bg-blue-600'}  text-white px-6 py-3 rounded-lg font-semibold hover:text-white transition-500 transition-all cursor-pointer flex items-center`}>
-                                {itemInCart ? 'Remove From Cart' :`Add to Cart `} {itemInCart ? <FaCartArrowDown className='ml-2' /> : <FaCartArrowDown className='ml-2' />}
+                        <div className='flex'>
+                            <input 
+                            type="number" 
+                            onChange={(e)=>{setProdQuantity(e.target.value); setChangeInQuantity(true);}} 
+                            value={prodQuantity} 
+                            min="1" max='10' 
+                            className="border-2 border-l-blue-600 border-b-blue-600 border-t-blue-600 outline-none focus:border-white bg-white/10 text-white p-2 rounded-l-lg font-semibold transition-500 transition-all" 
+                            />
+                            <button onClick={() => !itemInCart && addItemToCart()} className={`border-2 border-blue-600 ${itemInCart ? "bg-blue-600" : "hover:bg-blue-600 bg-transparent"}  text-white px-6 py-3 rounded-r-lg font-semibold hover:text-white transition-500 transition-all cursor-pointer flex items-center`}>
+                                {itemInCart ? `In Cart` :`Add to Cart `} {itemInCart ? <FaCartArrowDown className='ml-2' /> : <FaCartArrowDown className='ml-2' />}
                             </button>
-                            {/* <button className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 cursor-pointer hover:text-white transition-500 transition-all">
+                        </div>
+                            {/* <select className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 cursor-pointer hover:text-white transition-500 transition-all">
                                 Buy Now
                             </button> */}
                             <button onClick={()=> setReviewsTab(!reviewsTab)} className="border-2 border-transparent hover:border-white px-6 py-3 rounded-lg font-semibold bg-blue-600 hover:bg-transparent text-white transition-500 transition-all cursor-pointer flex items-center">
                                 See Reviews <FaComment className='ml-2' />
                             </button>
                     </div>
+                    {
+                        changeInQuantity && itemInCart &&
+                        <div>
+                            <button onClick={()=> {changeQuantityFunc(); setChangeInQuantity(false);}} className="border-2 border-blue-600 bg-white/10 text-blue-600 font-semibold cursor-pointer rounded-[15px] p-2 text-[10px]">Update</button>
+                        </div>
+                    }
                     <div>
                         
                     </div>

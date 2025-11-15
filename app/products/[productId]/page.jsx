@@ -5,7 +5,6 @@ import React from "react";
 const Page = async ({params}) => {
 
   let {productId}= await params;
-  console.log(productId);
 
 
   return (
