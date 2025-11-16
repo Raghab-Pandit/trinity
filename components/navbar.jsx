@@ -24,7 +24,7 @@ const Navbar = () => {
   {/* Logo Section */}
   <Link className="flex items-center space-x-3 cursor-pointer" href={'/'}>
     <TbSwords size={32} className="text-[#702cdf]" />
-    <h1 className="text-2xl font-semibold text-white hidden sm:block">Trinity</h1>
+    <h1 className="text-2xl font-semibold text-white hidden sm:block">Bizzo</h1>
   </Link>
 
   {/* Right Section */}
