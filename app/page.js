@@ -54,14 +54,14 @@ useEffect(() => {
 
 useEffect(()=>{
   searchProduct()
-}, [search]);
+}, [search], []);
 
 
   return(
     <div className="mx-10 text-center">
     {/* <Product name="Sample Product" price="29.99" /> */}
     {fetchError && 
-    <div className="font-semibold text-white text-center flex items-center justify-center mt-30">No product with "{search}" is Available</div>}
+    <div className="font-semibold text-white text-center flex items-center justify-center mt-30">No product with &quot;{search}&quot; is Available</div>}
     <div className="grid grid-cols-4 gap-6 space-y-2 p-10">
         {
           searchMode ?
