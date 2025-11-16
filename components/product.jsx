@@ -5,7 +5,7 @@ import React from 'react'
 const Product = ({id, image, name, price}) => {
   return (
     <>
-        <div className='h-100 w-70 shadow-[0_4px_30px_rgba(0,0,0,0.1)]'>
+        <div className='h-100 w-50 lg:w-70 shadow-[0_4px_30px_rgba(0,0,0,0.1)]'>
             <div className="h-[65%] overflow-hidden w-full border border-transparent rounded-t-[20px] bg-white flex items-end justify-center">
                 {image ? 
                 <Image
