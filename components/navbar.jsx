@@ -28,13 +28,13 @@ const Navbar = () => {
   </Link>
 
   {/* Right Section */}
-  <div className="flex items-center space-x-5">
+  <div className="flex items-center space-x-2 sm:space-x-5">
     {/* Search Bar */}
-    <div className="flex items-center bg-gray-800 focus:border-2 focus:border-[#702cdf] rounded-full h-10 px-3 w-[200px] sm:w-[300px]">
+    <div className="flex items-center bg-gray-800 focus:border-2 focus:border-[#702cdf] rounded-full h-10 px-3 w-[150px] sm:w-[300px]">
       <IoSearchOutline size={18} className="text-[#702cdf]" />
       <input
         type="text"
-        placeholder="Search for products..."
+        placeholder="Search"
         onChange={( e )=> dispatch(Searchparams(e.target.value))}
         className="ml-2 w-full bg-transparent text-white placeholder-gray-400 text-sm outline-none"
       />
