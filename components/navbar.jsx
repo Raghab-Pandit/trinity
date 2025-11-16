@@ -24,13 +24,13 @@ const Navbar = () => {
   {/* Logo Section */}
   <Link className="flex items-center space-x-3 cursor-pointer" href={'/'}>
     <TbSwords size={32} className="text-[#702cdf]" />
-    <h1 className="text-2xl font-semibold text-white">Trinity</h1>
+    <h1 className="text-2xl font-semibold text-white hidden sm:block">Trinity</h1>
   </Link>
 
   {/* Right Section */}
   <div className="flex items-center space-x-5">
     {/* Search Bar */}
-    <div className="flex items-center bg-gray-800 focus:border-2 focus:border-[#702cdf] rounded-full h-10 px-3 w-[300px]">
+    <div className="flex items-center bg-gray-800 focus:border-2 focus:border-[#702cdf] rounded-full h-10 px-3 w-[200px] sm:w-[300px]">
       <IoSearchOutline size={18} className="text-[#702cdf]" />
       <input
         type="text"
