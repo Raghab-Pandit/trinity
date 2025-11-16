@@ -62,7 +62,7 @@ useEffect(()=>{
     {/* <Product name="Sample Product" price="29.99" /> */}
     {fetchError && 
     <div className="font-semibold text-white text-center flex items-center justify-center mt-30">No product with &quot;{search}&quot; is Available</div>}
-    <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 space-y-2 py-8 px-2">
+    <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 space-y-2 py-8 px-7">
         {
           searchMode ?
                   searchProducts.map((product, index) => (
