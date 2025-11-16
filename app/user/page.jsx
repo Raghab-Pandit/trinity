@@ -109,7 +109,7 @@ const Page = () => {
                 <td className="text-center py-5 flex items-center justify-center">
                   <div 
                   onClick={()=> dispatch(removeFromCart(prod.id))}
-                  className="flex items-center justify-center w-8 h-8 text-[20px] cursor-pointer hover:bg-red-600/40 transition-all transition-300 bg-red-500/40 text-red-500 font-semibold rounded-[50%]">
+                  className="flex items-center justify-center w-8 h-8 text-[20px] cursor-pointer hover:bg-red-400/40 transition-all transition-300 bg-red-500/40 text-red-500 font-semibold rounded-[50%]">
                     <MdDeleteOutline />
                   </div>
                 </td>
