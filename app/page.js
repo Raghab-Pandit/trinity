@@ -70,7 +70,7 @@ useEffect(()=>{
                                   ))
           :
           products.map((product, index) => (
-            <div className="w-full flex items-center justify-center">
+            <div key={index} className="w-full flex items-center justify-center">
               <Product key={index} id={product.id} image={product.thumbnail} name={product.title} price={product.price} />
             </div>
           ))
