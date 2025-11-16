@@ -54,7 +54,7 @@ useEffect(() => {
 
 useEffect(()=>{
   searchProduct()
-}, [search]);
+}, [search], []);
 
 
   return(
