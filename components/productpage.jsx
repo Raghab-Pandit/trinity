@@ -134,9 +134,9 @@ useEffect(() => {
                             onChange={(e)=>{setProdQuantity(e.target.value); setChangeInQuantity(true);}} 
                             value={prodQuantity} 
                             min="1" max='10' 
-                            className="border-2 border-l-blue-600 border-b-blue-600 border-t-blue-600 outline-none focus:border-white bg-white/10 text-white p-2 rounded-l-lg font-semibold transition-500 transition-all" 
+                            className="border-2 border-transparent border-l-blue-600 border-b-blue-600 border-t-blue-600 outline-none focus:border-white bg-white/10 text-white p-2 rounded-l-lg font-semibold transition-500 transition-all" 
                             />
-                            <button onClick={() => !itemInCart && addItemToCart()} className={`border-2 border-blue-600 ${itemInCart ? "bg-blue-600" : "hover:bg-blue-600 bg-transparent"}  text-white px-6 py-3 rounded-r-lg font-semibold hover:text-white transition-500 transition-all cursor-pointer flex items-center`}>
+                            <button onClick={() => !itemInCart && addItemToCart()} className={`border-2 border-blue-600 ${itemInCart ? "bg-blue-600" : "hover:bg-blue-600 bg-transparent"}  text-white px-6 py-3 rounded-r-lg font-semibold hover:text-white transition-300 transition-all cursor-pointer flex items-center`}>
                                 {itemInCart ? `In Cart` :`Add to Cart `} {itemInCart ? <FaCartArrowDown className='ml-2' /> : <FaCartArrowDown className='ml-2' />}
                             </button>
                         </div>
