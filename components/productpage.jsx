@@ -171,32 +171,37 @@ useEffect(() => {
                             {Product?.description}
                         </p>
                     </div>
-                    <div className="flex space-x-4 items-center justify-between mt-10">
-                        <div className='flex'>
+                    <div className="flex flex-col space-x-4 mt-10">
+                        <div className='flex items-center justify-between w-full'>
+                           <div className="flex">
                             <input 
                             type="number" 
                             onChange={(e)=>{setProdQuantity(e.target.value); setChangeInQuantity(true);}} 
                             value={prodQuantity} 
                             min="1" max='10' 
-                            className="border-2 border-transparent border-l-blue-600 border-b-blue-600 border-t-blue-600 outline-none focus:border-white bg-white/10 text-white p-2 rounded-l-lg font-semibold transition-500 transition-all" 
+                            className="border-2 border-transparent border-l-blue-600 border-b-blue-600 border-t-blue-600 outline-none focus:border-white bg-white/10 text-white p-2 rounded-tl-lg font-semibold transition-500 transition-all" 
                             />
                             <button onClick={() => !itemInCart && addItemToCart()} className={`border-2 border-blue-600 ${itemInCart ? "bg-blue-600" : "hover:bg-blue-600 bg-transparent"}  text-white px-6 py-3 rounded-r-lg font-semibold hover:text-white transition-300 transition-all cursor-pointer flex items-center`}>
                                 {itemInCart ? `In Cart` :`Add to Cart `} {itemInCart ? <FaCartArrowDown className='ml-2' /> : <FaCartArrowDown className='ml-2' />}
                             </button>
-                        </div>
+                            </div>
                             {/* <select className="border-2 border-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 cursor-pointer hover:text-white transition-500 transition-all">
                                 Buy Now
                             </button> */}
                             <button onClick={()=> setReviewsTab(!reviewsTab)} className="border-2 border-transparent hover:border-white px-6 py-3 rounded-lg font-semibold bg-blue-600 hover:bg-transparent text-white transition-500 transition-all cursor-pointer flex items-center">
                                 See Reviews <FaComment className='ml-2' />
                             </button>
-                    </div>
-                    {
+                        </div> 
+                        {
                         changeInQuantity && itemInCart &&
                         <div>
-                            <button onClick={()=> {changeQuantityFunc(); setChangeInQuantity(false);}} className="border-2 border-blue-600 bg-white/10 text-blue-600 font-semibold cursor-pointer rounded-[15px] p-2 text-[10px]">Update</button>
+                            <button 
+                            className="border-2 border-blue-600 border-t-transparent hover:border-t-transparent bg-white/10 text-white font-semibold cursor-pointer rounded-b-[15px] p-2 text-[10px]"
+                            onClick={()=> {changeQuantityFunc(); setChangeInQuantity(false);}} 
+                            >Update</button>
                         </div>
-                    }
+                         } 
+                    </div>
                     <div>
                         
                     </div>
