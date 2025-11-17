@@ -23,11 +23,11 @@ const Page = () => {
       <div className='p-3 flex flex-col justify-between w-full sm:w-auto'>
 
         {/* User Info */}
-        <div className='p-4 flex justify-center sm:justify-start items-center sm:space-x-2 bg-[#1E2330] rounded-[40px] w-full'>
+        <div className='p-4 flex justify-center sm:justify-start items-center space-x-2 bg-[#1E2330] rounded-[40px] w-full'>
           <div className="flex items-center justify-center h-10 bg-[#702cdf]/20 transition-colors duration-200 rounded-full p-2 cursor-pointer">
             <CiUser size={22} className="text-[#702cdf]" />
           </div>
-            <div className='hidden sm:flex flex-col justify-center'>
+            <div className='flex flex-col justify-center'>
                 <h2 className='font-bold'>{user.name}</h2>
             </div>
         </div>
@@ -84,10 +84,10 @@ const Page = () => {
                     </td>
 
                     <td className="text-center px-3 py-2">
-                      <Link href={`/products/${prod.product.id}`} className="text-white/80 hover:text-white">{prod.quantity}</Link>
+                      <Link href={`/products/${prod.product.id}`} className="text-white/80 hover:text-white">{`${prod.quantity} * ($${prod.product.price})`}</Link>
                     </td>
 
-                    <td className="text-center px-3 py-2">${prod.product.price}</td>
+                    <td className="text-center px-3 py-2">${prod.product.price*prod.quantity}`</td>
                     <td className="text-center px-3 py-2">Pending</td>
 
                     <td className="text-center py-5 flex items-center justify-center">
