@@ -23,7 +23,6 @@ Bizzo is an e-commerce web app where you can go through daily-use products and a
 -app: This folder consists of my whole frontend code.
 -axiosInstance: I have used axios to perform api works so this folder has my baseURL which makes my apifetching in most files simple and easy.
 -components: this folder consists of components that are used in other files, mainly reusable jsx files.
--
 
 "Features in Bizzo":
 -search: you can search for your products using their title.
@@ -32,7 +31,6 @@ Bizzo is an e-commerce web app where you can go through daily-use products and a
 -responsive: Bizzo is a web app made for every device with various sizes. it looks amazing from your mobile to your tv.
 -image navigator: you can check the product from any angles (if the images are available).
 -see reviews: you can see the reviews by our other customers and make the decision of buying our product.
--
 
 
 "Tools":
@@ -41,7 +39,6 @@ Bizzo is an e-commerce web app where you can go through daily-use products and a
 -Redux Toolkit: Widely used state management tool or i like to call it "a (temporary)database for frontend"
 -API: since i have not yet integrated backend in this project so i use a dummy api. All credits to "https://dummyjson.com/products".
 -Axios: i used it for performing api works(fetching).
--
 
 Authors:
 Bizzo is designed, programmed and launched by Raghab Pandit.
