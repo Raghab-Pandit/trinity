@@ -2,7 +2,7 @@
 *an e-commerce web app*
 
 
-Bizzo is an e-commerce web app where you can go through daily-use products and add them to cart. Bizzo is designed and programmed by Raghab Pandit.
+Bizzo is an e-commerce web app where you can go through daily-use products and add them to cart. Bizzo is designed and developed by Raghab Pandit.
 
 
 <img width="1365" height="520" alt="1" src="https://github.com/user-attachments/assets/7ca34330-de94-423f-b355-43e74b566d29" />
@@ -11,7 +11,6 @@ Bizzo is an e-commerce web app where you can go through daily-use products and a
 
 **How to Run in your code editor?**
 - Open your Code Editor
-- Copy the repository link (https://github.com/Raghab-Pandit/bizzo.git)
 - Open terminal in code editor and run this command
   ```
   git clone https://github.com/Raghab-Pandit/bizzo.git
@@ -47,4 +46,4 @@ Bizzo is an e-commerce web app where you can go through daily-use products and a
 - *Axios*: i used it for performing api works(fetching)
 
 **Authors**
-Bizzo is designed, programmed and launched by Raghab Pandit.
+Bizzo is designed, developed and launched by Raghab Pandit.
